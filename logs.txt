@@ -1,0 +1,12 @@
+[2026-11-02 17:15:29] [INFO] Reserva confirmada con éxito para Ana María Gómez en Sala Creativa Alfa. Total: $214.2
+[2026-11-02 17:15:29] [CONTROLADO] Op #2 falló controladamente: Identificación inválida: 'ABC12345'. Debe ser numérica y tener al menos 6 dígitos.
+[2026-11-02 17:15:29] [INFO] Reserva confirmada con éxito para Lucía Martínez en Servidor Portátil de Pruebas. Total: $458.15
+[2026-11-02 17:15:29] [ERROR] Fallo operativo al procesar reserva: Las horas de asesoría deben ser mayores a 0.
+[2026-11-02 17:15:29] [CONTROLADO] Op #4 falló controladamente: Error operativo en reserva: Las horas de asesoría deben ser mayores a 0.
+[2026-11-02 17:15:29] [INFO] Reserva confirmada con éxito para Sofía Valentina Roa en Arquitectura Cloud y DevOps. Total: $803.25
+[2026-11-02 17:15:29] [CONTROLADO] Op #6 falló controladamente: Correo electrónico inválido: 'carlos.vives-sin-arroba'.
+[2026-11-02 17:15:29] [ERROR] Fallo operativo al procesar reserva: El tiempo de alquiler de equipos debe ser mayor a 0 días.
+[2026-11-02 17:15:29] [CONTROLADO] Op #7 falló controladamente: Error operativo en reserva: El tiempo de alquiler de equipos debe ser mayor a 0 días.
+[2026-11-02 17:15:29] [INFO] Reserva confirmada con éxito para Felipe Andrés Morales en Sala Creativa Alfa. Total: $348.0
+[2026-11-02 17:15:29] [INFO] Reserva cancelada para el cliente Diana Marcela Torres.
+[2026-11-02 17:15:29] [INFO] Reserva confirmada con éxito para Esteban Quintero en Servidor Portátil de Pruebas. Total: $1011.5
