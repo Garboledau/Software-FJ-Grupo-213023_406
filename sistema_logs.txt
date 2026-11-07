@@ -1,0 +1,34 @@
+[2026-11-07 00:09:20] [INFO] Servicio registrado: Sala Creativa Alfa
+[2026-11-07 00:09:20] [INFO] Servicio registrado: Servidor Portátil de Pruebas
+[2026-11-07 00:09:20] [INFO] Servicio registrado: Arquitectura Cloud y DevOps
+[2026-11-07 00:09:20] [INFO] Servicio registrado: Sala Beta (en mantenimiento)
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Ana María Gómez
+[2026-11-07 00:09:20] [INFO] Reserva confirmada con éxito para Ana María Gómez en Sala Creativa Alfa. Total: $214.2
+[2026-11-07 00:09:20] [INFO] Reserva procesada y cobrada: $214.2
+[2026-11-07 00:09:20] [CONTROLADO] Op #2 falló controladamente: Identificación inválida: 'ABC12345'. Debe ser numérica y tener al menos 6 dígitos.
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Lucía Martínez
+[2026-11-07 00:09:20] [INFO] Reserva confirmada con éxito para Lucía Martínez en Servidor Portátil de Pruebas. Total: $458.15
+[2026-11-07 00:09:20] [INFO] Reserva procesada y cobrada: $458.15
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Jorge Eliécer Rueda
+[2026-11-07 00:09:20] [ERROR] Fallo operativo al procesar reserva: Las horas de asesoría deben ser mayores a 0.
+[2026-11-07 00:09:20] [CONTROLADO] Op #4 falló controladamente: Error operativo en reserva: Las horas de asesoría deben ser mayores a 0.
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Sofía Valentina Roa
+[2026-11-07 00:09:20] [INFO] Reserva confirmada con éxito para Sofía Valentina Roa en Arquitectura Cloud y DevOps. Total: $803.25
+[2026-11-07 00:09:20] [INFO] Reserva procesada y cobrada: $803.25
+[2026-11-07 00:09:20] [CONTROLADO] Op #6 falló controladamente: Correo electrónico inválido: 'carlos.vives-sin-arroba'.
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Mariana Cifuentes
+[2026-11-07 00:09:20] [ERROR] Fallo operativo al procesar reserva: El tiempo de alquiler de equipos debe ser mayor a 0 días.
+[2026-11-07 00:09:20] [CONTROLADO] Op #7 falló controladamente: Error operativo en reserva: El tiempo de alquiler de equipos debe ser mayor a 0 días.
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Felipe Andrés Morales
+[2026-11-07 00:09:20] [INFO] Reserva confirmada con éxito para Felipe Andrés Morales en Sala Creativa Alfa. Total: $348.0
+[2026-11-07 00:09:20] [INFO] Reserva procesada y cobrada: $348.0
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Diana Marcela Torres
+[2026-11-07 00:09:20] [INFO] Reserva cancelada para el cliente Diana Marcela Torres.
+[2026-11-07 00:09:20] [INFO] Cliente registrado: Santiago Martinez
+[2026-11-07 00:09:20] [ERROR] Fallo operativo al procesar reserva: Error en cálculo de costo para Sala: El descuento debe estar entre 0.0 y 1.0 (0% a 100%).
+[2026-11-07 00:09:20] [CONTROLADO] Op #10 falló controladamente: Error operativo en reserva: Error en cálculo de costo para Sala: El descuento debe estar entre 0.0 y 1.0 (0% a 100%).
+[2026-11-07 00:09:20] [CONTROLADO] Creación de servicio rechazada: La tarifa base no puede ser un valor negativo.
+[2026-11-07 00:09:20] [ERROR] Fallo operativo al procesar reserva: El servicio 'Sala Beta (en mantenimiento)' no esta disponible en este momento.
+[2026-11-07 00:09:20] [CONTROLADO] Reserva de servicio no disponible: Error operativo en reserva: El servicio 'Sala Beta (en mantenimiento)' no esta disponible en este momento.
+[2026-11-07 00:09:20] [CONTROLADO] Reserva incompleta: Faltan parametros obligatorios: duracion.
+[2026-11-07 00:09:20] [CONTROLADO] Cotización rechazada: cotizar() necesita al menos la duracion.
