@@ -163,15 +163,40 @@ class Cliente(EntidadBase):
             )
         self._identificacion = str(value)
 
-    @property
-    def correo(self):
-        return self._correo
+@property
+def correo(self):
+    return self._correo
 
-    @correo.setter
-    def correo(self, value):
-        if not value or "@" not in value or "." not in value:
-            raise ClienteError(f"Correo electrónico inválido: '{value}'.")
-        self._correo = value.strip()
+@correo.setter
+def correo(self, value):
+    # Eliminar espacios al inicio y al final primero
+    valor_limpio = value.strip()
+
+    #No puede estar vacío
+    if not valor_limpio:
+        raise ClienteError("El correo electrónico no puede estar vacío.")
+    
+    Debe contener exactamente un @
+    if valor_limpio.count("@") != 1:
+        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Debe contener un solo '@'.")
+    
+    #Separar en parte local y dominio
+    parte_local, dominio = valor_limpio.split("@")
+    
+    #La parte local no puede estar vacía ni empezar/terminar con punto
+    if not parte_local or parte_local.startswith(".") or parte_local.endswith("."):
+        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa antes del '@'.")
+    
+    # El dominio debe tener al menos un punto y no estar vacío
+    if "." not in dominio or dominio.startswith(".") or dominio.endswith("."):
+        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa después del '@'.")
+    
+    # No debe contener espacios en ninguna parte
+    if " " in valor_limpio:
+        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. No debe contener espacios.")
+    
+    # Si todo está bien
+    self._correo = valor_limpio
 
     @property
     def telefono(self):
@@ -354,9 +379,7 @@ class Reserva(EntidadBase):
                 )
 
             self.servicio.verificar_disponibilidad()
-            self.costo_total = self.servicio.calcular_costo(
-                self.duracion, **self.opciones_costo
-            )
+           
             self.costo_total = self.servicio.calcular_costo(
                 self.duracion, **self.opciones_costo
             )
@@ -597,7 +620,7 @@ def ejecutar_simulacion_software_fj():
             "3217532359",
             sala,
             7.0,
-            {"descuento": 10.0},
+            {"descuento": 0.10},
         ),
     ]
 
