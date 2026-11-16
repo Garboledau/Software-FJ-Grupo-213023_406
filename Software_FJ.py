@@ -2,11 +2,12 @@
 # Nombre del archivo: Software_FJ.py
 # Fecha: 03/11/2026
 # Version:0.2
-# Estudiantes: Geraldyn Arboleda Usechy - Miguel Angel Guarnizo Calderon
+# Estudiantes: Geraldyn Arboleda Usechy - Miguel Angel Guarnizo Calderon - Oscar Ivan Perez Mavisoy
 # Grupo:213023_406
 # -----------------------------------------------------------------------
 
 # — Se importan las librerias necesarias para el funcionamiento del software —
+
 from abc import ABC, abstractmethod
 import datetime
 import os
@@ -152,38 +153,83 @@ class Cliente(EntidadBase):
         self._nombre = value.strip()
 
     @property
-    def identificacion(self):
-        return self._identificacion
-
-    @identificacion.setter
-    def identificacion(self, value):
-        if not value or not str(value).isdigit() or len(str(value)) < 6:
-            raise ClienteError(
-                f"Identificación inválida: '{value}'. Debe ser numérica y tener al menos 6 dígitos."
-            )
-        self._identificacion = str(value)
-
-    @property
     def correo(self):
-        return self._correo
+            return self._correo
 
     @correo.setter
     def correo(self, value):
-        if not value or "@" not in value or "." not in value:
-            raise ClienteError(f"Correo electrónico inválido: '{value}'.")
-        self._correo = value.strip()
+            if not isinstance(value, str):
+                raise ClienteError("El correo debe ser una cadena de texto.")
 
-    @property
-    def telefono(self):
-        return self._telefono
+            valor_limpio = value.strip()
 
-    @telefono.setter
-    def telefono(self, value):
-        if not value or not str(value).isdigit() or len(str(value)) < 7:
-            raise ClienteError(
-                f"Teléfono inválido: '{value}'. Debe tener al menos 7 dígitos."
+            if not valor_limpio:
+             raise ClienteError("El correo electrónico no puede estar vacío.")
+
+            if " " in valor_limpio:
+             raise ClienteError(
+        f"Correo electrónico inválido: '{valor_limpio}'. No debe contener espacios."
+        )
+
+             if valor_limpio.count("@") != 1:
+                raise ClienteError(
+            f"Correo electrónico inválido: '{valor_limpio}'. Debe contener un solo '@'."
+        )
+
+            parte_local, dominio = valor_limpio.split("@")
+
+            if (
+                not parte_local
+                or parte_local.startswith(".")
+                or parte_local.endswith(".")
+                ):
+                raise ClienteError(
+        f"Correo electrónico inválido: '{valor_limpio}'. Revisa antes del '@'."
+        )
+
+            if (
+        not dominio
+        or "." not in dominio
+        or dominio.startswith(".")
+        or dominio.endswith(".")
+        ):
+                raise ClienteError(
+                f"Correo electrónico inválido: '{valor_limpio}'. Revisa después del '@'."
             )
-        self._telefono = str(value)
+
+            self._correo = valor_limpio
+    
+               
+            if not valor_limpio:
+                raise ClienteError("El correo electrónico no puede estar vacío.")
+    
+    
+            if valor_limpio.count("@") != 1:
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Debe contener un solo '@'.")
+    
+   
+            if not parte_local or parte_local.startswith(".") or parte_local.endswith("."):
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa antes del '@'.")
+    
+            if "." not in dominio or dominio.startswith(".") or dominio.endswith("."):
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa después del '@'.")
+    
+            if " " in valor_limpio:
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. No debe contener espacios.")
+    
+            self._correo = valor_limpio
+            @property
+            def telefono(self):
+                return self._telefono
+    
+           
+            @telefono.setter
+            def telefono(self, value):
+                if not value or not str(value).isdigit() or len(str(value)) < 7:
+                    raise ClienteError(
+                        f"Teléfono inválido: '{value}'. Debe tener al menos 7 dígitos."
+                    )
+            self._telefono = str(value)
 
     def obtener_detalles(self) -> str:
         return f"Cliente: {self.nombre} | ID: {self.identificacion} | Correo: {self.correo} | Tel: {self.telefono}"
@@ -354,9 +400,7 @@ class Reserva(EntidadBase):
                 )
 
             self.servicio.verificar_disponibilidad()
-            self.costo_total = self.servicio.calcular_costo(
-                self.duracion, **self.opciones_costo
-            )
+           
             self.costo_total = self.servicio.calcular_costo(
                 self.duracion, **self.opciones_costo
             )
@@ -597,7 +641,7 @@ def ejecutar_simulacion_software_fj():
             "3217532359",
             sala,
             7.0,
-            {"descuento": 10.0},
+            {"descuento": 0.10},
         ),
     ]
 
@@ -654,7 +698,11 @@ def ejecutar_simulacion_software_fj():
     print("\n==========================================================")
     print(" PRUEBAS DEL SISTEMA")
     print("==========================================================")
-    cliente_prueba = gestor.clientes[0]  
+    if gestor.clientes:
+        cliente_prueba = gestor.clientes[0]
+    else:
+        print("No hay clientes registrados para realizar las pruebas.")
+        return
 
     # — Creación incorrecta de un servicio (tarifa negativa) —
     print("\n--- A. Creación incorrecta de servicio ---")
