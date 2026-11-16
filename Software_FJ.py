@@ -2,11 +2,12 @@
 # Nombre del archivo: Software_FJ.py
 # Fecha: 03/11/2026
 # Version:0.2
-# Estudiantes: Geraldyn Arboleda Usechy - Miguel Angel Guarnizo Calderon
+# Estudiantes: Geraldyn Arboleda Usechy - Miguel Angel Guarnizo Calderon - Oscar Ivan Perez Mavisoy
 # Grupo:213023_406
 # -----------------------------------------------------------------------
 
 # — Se importan las librerias necesarias para el funcionamiento del software —
+
 from abc import ABC, abstractmethod
 import datetime
 import os
@@ -152,63 +153,83 @@ class Cliente(EntidadBase):
         self._nombre = value.strip()
 
     @property
-    def identificacion(self):
-        return self._identificacion
+    def correo(self):
+            return self._correo
 
-    @identificacion.setter
-    def identificacion(self, value):
-        if not value or not str(value).isdigit() or len(str(value)) < 6:
-            raise ClienteError(
-                f"Identificación inválida: '{value}'. Debe ser numérica y tener al menos 6 dígitos."
+    @correo.setter
+    def correo(self, value):
+            if not isinstance(value, str):
+                raise ClienteError("El correo debe ser una cadena de texto.")
+
+            valor_limpio = value.strip()
+
+            if not valor_limpio:
+             raise ClienteError("El correo electrónico no puede estar vacío.")
+
+            if " " in valor_limpio:
+             raise ClienteError(
+        f"Correo electrónico inválido: '{valor_limpio}'. No debe contener espacios."
+        )
+
+             if valor_limpio.count("@") != 1:
+                raise ClienteError(
+            f"Correo electrónico inválido: '{valor_limpio}'. Debe contener un solo '@'."
+        )
+
+            parte_local, dominio = valor_limpio.split("@")
+
+            if (
+                not parte_local
+                or parte_local.startswith(".")
+                or parte_local.endswith(".")
+                ):
+                raise ClienteError(
+        f"Correo electrónico inválido: '{valor_limpio}'. Revisa antes del '@'."
+        )
+
+            if (
+        not dominio
+        or "." not in dominio
+        or dominio.startswith(".")
+        or dominio.endswith(".")
+        ):
+                raise ClienteError(
+                f"Correo electrónico inválido: '{valor_limpio}'. Revisa después del '@'."
             )
-        self._identificacion = str(value)
 
-@property
-def correo(self):
-    return self._correo
-
-@correo.setter
-def correo(self, value):
-    # Eliminar espacios al inicio y al final primero
-    valor_limpio = value.strip()
-
-    #No puede estar vacío
-    if not valor_limpio:
-        raise ClienteError("El correo electrónico no puede estar vacío.")
+            self._correo = valor_limpio
     
-    Debe contener exactamente un @
-    if valor_limpio.count("@") != 1:
-        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Debe contener un solo '@'.")
+               
+            if not valor_limpio:
+                raise ClienteError("El correo electrónico no puede estar vacío.")
     
-    #Separar en parte local y dominio
-    parte_local, dominio = valor_limpio.split("@")
     
-    #La parte local no puede estar vacía ni empezar/terminar con punto
-    if not parte_local or parte_local.startswith(".") or parte_local.endswith("."):
-        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa antes del '@'.")
+            if valor_limpio.count("@") != 1:
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Debe contener un solo '@'.")
     
-    # El dominio debe tener al menos un punto y no estar vacío
-    if "." not in dominio or dominio.startswith(".") or dominio.endswith("."):
-        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa después del '@'.")
+   
+            if not parte_local or parte_local.startswith(".") or parte_local.endswith("."):
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa antes del '@'.")
     
-    # No debe contener espacios en ninguna parte
-    if " " in valor_limpio:
-        raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. No debe contener espacios.")
+            if "." not in dominio or dominio.startswith(".") or dominio.endswith("."):
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. Revisa después del '@'.")
     
-    # Si todo está bien
-    self._correo = valor_limpio
-
-    @property
-    def telefono(self):
-        return self._telefono
-
-    @telefono.setter
-    def telefono(self, value):
-        if not value or not str(value).isdigit() or len(str(value)) < 7:
-            raise ClienteError(
-                f"Teléfono inválido: '{value}'. Debe tener al menos 7 dígitos."
-            )
-        self._telefono = str(value)
+            if " " in valor_limpio:
+                raise ClienteError(f"Correo electrónico inválido: '{valor_limpio}'. No debe contener espacios.")
+    
+            self._correo = valor_limpio
+            @property
+            def telefono(self):
+                return self._telefono
+    
+           
+            @telefono.setter
+            def telefono(self, value):
+                if not value or not str(value).isdigit() or len(str(value)) < 7:
+                    raise ClienteError(
+                        f"Teléfono inválido: '{value}'. Debe tener al menos 7 dígitos."
+                    )
+            self._telefono = str(value)
 
     def obtener_detalles(self) -> str:
         return f"Cliente: {self.nombre} | ID: {self.identificacion} | Correo: {self.correo} | Tel: {self.telefono}"
@@ -677,7 +698,11 @@ def ejecutar_simulacion_software_fj():
     print("\n==========================================================")
     print(" PRUEBAS DEL SISTEMA")
     print("==========================================================")
-    cliente_prueba = gestor.clientes[0]  
+    if gestor.clientes:
+        cliente_prueba = gestor.clientes[0]
+    else:
+        print("No hay clientes registrados para realizar las pruebas.")
+        return
 
     # — Creación incorrecta de un servicio (tarifa negativa) —
     print("\n--- A. Creación incorrecta de servicio ---")
